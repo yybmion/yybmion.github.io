@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>개발자 포트폴리오 - Dark v2</title>
+    <title>윤유빈 (Mion) - Backend Developer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -85,7 +85,7 @@
 
         .nav-logo {
             font-family: 'Syne', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-weight: 800;
             writing-mode: vertical-rl;
             text-orientation: mixed;
@@ -174,8 +174,15 @@
             font-size: clamp(3rem, 6vw, 6rem);
             font-weight: 800;
             line-height: 1.1;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
             position: relative;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--accent-purple);
+            margin-bottom: 2rem;
+            font-weight: 600;
         }
 
         .hero-content h1 .gradient-text {
@@ -282,6 +289,12 @@
         .code-line:nth-child(4) { animation-delay: 0.4s; }
         .code-line:nth-child(5) { animation-delay: 0.5s; }
         .code-line:nth-child(6) { animation-delay: 0.6s; }
+        .code-line:nth-child(7) { animation-delay: 0.7s; }
+        .code-line:nth-child(8) { animation-delay: 0.8s; }
+        .code-line:nth-child(9) { animation-delay: 0.9s; }
+        .code-line:nth-child(10) { animation-delay: 1.0s; }
+        .code-line:nth-child(11) { animation-delay: 1.1s; }
+        .code-line:nth-child(12) { animation-delay: 1.2s; }
 
         @keyframes fadeInCode {
             to {
@@ -289,10 +302,10 @@
             }
         }
 
-        .code-keyword { color: var(--accent-purple); }
-        .code-function { color: var(--accent-blue); }
+        .code-key { color: var(--accent-blue); }
         .code-string { color: var(--accent-green); }
-        .code-comment { color: var(--text-secondary); font-style: italic; }
+        .code-number { color: var(--accent-purple); }
+        .code-bracket { color: var(--text-secondary); }
 
         .cta-group {
             display: flex;
@@ -416,6 +429,47 @@
             background: rgba(167, 139, 250, 0.2);
             border-color: var(--accent-purple);
             transform: translateY(-2px);
+        }
+
+        /* OpenSource 섹션 추가 */
+        .opensource-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .opensource-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .opensource-item:hover {
+            border-color: var(--accent-green);
+            transform: translateX(10px);
+        }
+
+        .opensource-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .opensource-pr {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .opensource-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
         }
 
         /* Skills 섹션 */
@@ -548,6 +602,12 @@
             line-height: 1;
         }
 
+        .project-period {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            letter-spacing: 1px;
+        }
+
         .project-title {
             font-family: 'Syne', sans-serif;
             font-size: 1.8rem;
@@ -559,6 +619,27 @@
             color: var(--text-secondary);
             line-height: 1.8;
             margin-bottom: 1.5rem;
+        }
+
+        .project-highlights {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-highlights li {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .project-highlights li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
         }
 
         .project-tech {
@@ -741,12 +822,13 @@
 
     <!-- 사이드 네비게이션 -->
     <nav class="side-nav">
-        <div class="nav-logo">DEV</div>
+        <div class="nav-logo">MION</div>
         <div class="nav-dots">
             <div class="nav-dot active" data-label="Home"></div>
             <div class="nav-dot" data-label="About"></div>
             <div class="nav-dot" data-label="Skills"></div>
             <div class="nav-dot" data-label="Projects"></div>
+            <div class="nav-dot" data-label="OpenSource"></div>
             <div class="nav-dot" data-label="Contact"></div>
         </div>
     </nav>
@@ -761,27 +843,14 @@
                         Building the<br>
                         <span class="gradient-text">Future of Web</span>
                     </h1>
+                    <div class="hero-subtitle">Backend Developer</div>
                     <p class="hero-description">
-                        풀스택 개발자로서 최신 기술을 활용하여 혁신적인 웹 경험을 창조합니다. 
-                        사용자 중심의 설계와 확장 가능한 아키텍처가 저의 강점입니다.
+                        기술 도입에 대한 토론과 오픈소스 분석을 즐기는 백엔드 개발자입니다.
+                        제 궁극적인 목표는 개발자들에게 혁신적인 경험을 제공하는 오픈소스를 만드는 것입니다.
                     </p>
                     <div class="cta-group">
                         <a href="#projects" class="btn btn-primary"><span>프로젝트 보기</span></a>
                         <a href="#contact" class="btn btn-secondary">연락하기</a>
-                    </div>
-                    <div class="hero-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">5+</div>
-                            <div class="stat-label">Years Exp</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">50+</div>
-                            <div class="stat-label">Projects</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">98%</div>
-                            <div class="stat-label">Satisfied</div>
-                        </div>
                     </div>
                 </div>
                 <div class="hero-visual">
@@ -791,13 +860,18 @@
                             <div class="code-dot"></div>
                             <div class="code-dot"></div>
                         </div>
-                        <div class="code-line"><span class="code-keyword">const</span> developer = {</div>
-                        <div class="code-line">  <span class="code-function">name</span>: <span class="code-string">'Full Stack Developer'</span>,</div>
-                        <div class="code-line">  <span class="code-function">skills</span>: [<span class="code-string">'React'</span>, <span class="code-string">'Node.js'</span>, <span class="code-string">'Python'</span>],</div>
-                        <div class="code-line">  <span class="code-function">passion</span>: <span class="code-string">'Building amazing things'</span>,</div>
-                        <div class="code-line">  <span class="code-function">status</span>: <span class="code-string">'Available for hire'</span></div>
-                        <div class="code-line">};</div>
-                        <div class="code-line"><span class="code-comment">// Let's create something amazing together</span></div>
+                        <div class="code-line"><span class="code-bracket">{</span></div>
+                        <div class="code-line">  <span class="code-key">"name"</span>: <span class="code-string">"윤유빈 (Mion)"</span>,</div>
+                        <div class="code-line">  <span class="code-key">"role"</span>: <span class="code-string">"Backend Developer"</span>,</div>
+                        <div class="code-line">  <span class="code-key">"email"</span>: <span class="code-string">"yunyubin54@gmail.com"</span>,</div>
+                        <div class="code-line">  <span class="code-key">"location"</span>: <span class="code-string">"Gyeonggi-do, Korea"</span>,</div>
+                        <div class="code-line">  <span class="code-key">"skills"</span>: <span class="code-bracket">[</span></div>
+                        <div class="code-line">    <span class="code-string">"Java"</span>, <span class="code-string">"Spring Boot"</span>, <span class="code-string">"MySQL"</span>, <span class="code-string">"PostgreSQL"</span>,</div>
+                        <div class="code-line">    <span class="code-string">"Redis"</span>, <span class="code-string">"WebSocket"</span>, <span class="code-string">"OAuth2"</span>, <span class="code-string">"JWT"</span>,</div>
+                        <div class="code-line">    <span class="code-string">"AWS"</span>, <span class="code-string">"Docker"</span>, <span class="code-string">"K6"</span>, <span class="code-string">"Prometheus"</span></div>
+                        <div class="code-line">  <span class="code-bracket">]</span>,</div>
+                        <div class="code-line">  <span class="code-key">"interests"</span>: <span class="code-bracket">[</span><span class="code-string">"Open Source"</span><span class="code-bracket">]</span></div>
+                        <div class="code-line"><span class="code-bracket">}</span></div>
                     </div>
                 </div>
             </div>
@@ -807,31 +881,35 @@
         <section class="about" id="about">
             <div class="about-container">
                 <div class="section-label">01 — About Me</div>
-                <h2 class="section-title">나를 소개합니다</h2>
+                <h2 class="section-title">저를 소개합니다</h2>
                 <div class="about-grid">
                     <div class="about-text">
                         <p>
-                            안녕하세요! 저는 <span class="highlight">사용자 경험을 최우선</span>으로 생각하며 
-                            기술적 완성도를 추구하는 풀스택 개발자입니다.
+                            안녕하세요! 저는 <span class="highlight">성능 최적화와 문제 해결</span>을 좋아하는 
+                            백엔드 개발자 윤유빈입니다.
                         </p>
                         <p>
-                            프론트엔드부터 백엔드, 데이터베이스, 그리고 클라우드 인프라까지 
-                            <span class="highlight">전체 스택을 이해하고 구현</span>할 수 있습니다. 
-                            특히 성능 최적화와 확장 가능한 아키텍처 설계에 강점이 있습니다.
+                            실시간 채팅 서버부터 위치 기반 서비스까지 다양한 프로젝트를 진행하며 
+                            <span class="highlight">Redis, WebSocket, 알고리즘 최적화</span> 등을 활용한 
+                            성능 개선 경험을 쌓았습니다.
                         </p>
                         <p>
-                            새로운 기술을 빠르게 습득하고 적용하는 것을 즐기며, 
-                            팀과의 협업을 통해 더 나은 결과물을 만들어내는 것을 중요하게 생각합니다.
+                            특히 JWT 검증 시간을 98% 개선하고, 비속어 필터링을 73% 단축하는 등 
+                            <span class="highlight">실질적인 성능 개선</span>에 집중합니다.
+                        </p>
+                        <p>
+                            Hibernate ORM, Spring Integration 등 <span class="highlight">오픈소스 기여</span>를 통해 
+                            커뮤니티에 기여하고 기술적 성장을 이어가고 있습니다.
                         </p>
                     </div>
                     <div>
                         <div class="skill-tags">
+                            <span class="skill-tag">Performance Tuning</span>
                             <span class="skill-tag">Problem Solver</span>
-                            <span class="skill-tag">Fast Learner</span>
-                            <span class="skill-tag">Team Player</span>
-                            <span class="skill-tag">Detail Oriented</span>
-                            <span class="skill-tag">Creative Thinker</span>
-                            <span class="skill-tag">Performance Focused</span>
+                            <span class="skill-tag">Algorithm</span>
+                            <span class="skill-tag">Real-time System</span>
+                            <span class="skill-tag">Open Source</span>
+                            <span class="skill-tag">Cache Strategy</span>
                         </div>
                     </div>
                 </div>
@@ -841,34 +919,20 @@
         <!-- Skills 섹션 -->
         <section class="skills" id="skills">
             <div class="skills-container">
-                <div class="section-label">02 — My Skills</div>
+                <div class="section-label">02 — Tech Stack</div>
                 <h2 class="section-title">기술 스택</h2>
                 <div class="skills-grid">
                     <div class="skill-card">
                         <div class="skill-header">
-                            <h3 class="skill-title">Frontend</h3>
-                            <div class="skill-icon">⚡</div>
+                            <h3 class="skill-title">Language & Framework</h3>
+                            <div class="skill-icon">☕</div>
                         </div>
                         <ul class="skill-list">
-                            <li>React.js & Next.js</li>
-                            <li>Vue.js & Nuxt.js</li>
-                            <li>TypeScript & JavaScript</li>
-                            <li>Tailwind CSS & Styled Components</li>
-                            <li>Redux & State Management</li>
-                        </ul>
-                    </div>
-
-                    <div class="skill-card">
-                        <div class="skill-header">
-                            <h3 class="skill-title">Backend</h3>
-                            <div class="skill-icon">🚀</div>
-                        </div>
-                        <ul class="skill-list">
-                            <li>Node.js & Express</li>
-                            <li>Python & Django</li>
-                            <li>RESTful API Design</li>
-                            <li>GraphQL</li>
-                            <li>Microservices Architecture</li>
+                            <li>Java</li>
+                            <li>Spring Boot</li>
+                            <li>Python</li>
+                            <li>JavaScript</li>
+                            <li>C</li>
                         </ul>
                     </div>
 
@@ -878,25 +942,36 @@
                             <div class="skill-icon">💾</div>
                         </div>
                         <ul class="skill-list">
-                            <li>PostgreSQL & MySQL</li>
-                            <li>MongoDB</li>
+                            <li>MySQL</li>
+                            <li>PostgreSQL</li>
                             <li>Redis</li>
-                            <li>Database Optimization</li>
-                            <li>Data Modeling</li>
                         </ul>
                     </div>
 
                     <div class="skill-card">
                         <div class="skill-header">
-                            <h3 class="skill-title">DevOps</h3>
+                            <h3 class="skill-title">Infrastructure</h3>
+                            <div class="skill-icon">☁️</div>
+                        </div>
+                        <ul class="skill-list">
+                            <li>AWS</li>
+                            <li>NGINX</li>
+                            <li>Docker</li>
+                            <li>Vercel</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <h3 class="skill-title">DevOps & Tools</h3>
                             <div class="skill-icon">🛠️</div>
                         </div>
                         <ul class="skill-list">
-                            <li>Docker & Kubernetes</li>
-                            <li>AWS & Google Cloud</li>
-                            <li>CI/CD Pipelines</li>
-                            <li>Git & GitHub Actions</li>
-                            <li>Linux Administration</li>
+                            <li>GitHub Actions</li>
+                            <li>K6, JMeter</li>
+                            <li>Prometheus, Grafana</li>
+                            <li>Git/GitHub</li>
+                            <li>Postman, IntelliJ</li>
                         </ul>
                     </div>
                 </div>
@@ -906,63 +981,117 @@
         <!-- Projects 섹션 -->
         <section class="projects" id="projects">
             <div class="projects-container">
-                <div class="section-label">03 — My Work</div>
+                <div class="section-label">03 — Projects</div>
                 <h2 class="section-title">주요 프로젝트</h2>
 
-                <div class="project-item">
+                <div class="project-item" onclick="location.href='project-athens.html'">
                     <div class="project-meta">
                         <div class="project-number">01</div>
-                        <h3 class="project-title">E-Commerce Platform</h3>
+                        <div class="project-period">Mar.2024 - Jan.2025</div>
+                        <h3 class="project-title">Athens</h3>
                         <p class="project-description">
-                            대규모 B2C 전자상거래 플랫폼 개발. 
-                            실시간 재고 관리, 결제 시스템, 추천 알고리즘을 구현하여 
-                            월 100만 명의 사용자를 처리합니다.
+                            실시간 익명 채팅 토론 서비스
                         </p>
+                        <ul class="project-highlights">
+                            <li>WebSocket(STOMP) 기반 실시간 채팅 서버 구축</li>
+                            <li>Redis 캐싱으로 JWT 검증 시간 98% 개선 (50ms → 1ms)</li>
+                            <li>Aho-Corasick 알고리즘으로 비속어 필터링 73% 단축 (300ms → 80ms)</li>
+                            <li>TreeMap 활용 WebSocket 세션 만료 검사 O(n) → O(1) 최적화</li>
+                        </ul>
                         <div class="project-tech">
-                            <span class="tech-badge">React</span>
-                            <span class="tech-badge">Node.js</span>
-                            <span class="tech-badge">MongoDB</span>
-                            <span class="tech-badge">AWS</span>
+                            <span class="tech-badge">Spring Boot</span>
+                            <span class="tech-badge">WebSocket</span>
+                            <span class="tech-badge">Redis</span>
+                            <span class="tech-badge">JWT</span>
+                            <span class="tech-badge">OAuth2</span>
                         </div>
                     </div>
                     <div class="project-visual"></div>
                 </div>
 
-                <div class="project-item">
+                <div class="project-item" onclick="location.href='project-yumcup.html'">
                     <div class="project-meta">
                         <div class="project-number">02</div>
-                        <h3 class="project-title">Analytics Dashboard</h3>
+                        <div class="project-period">Nov.2024 - Feb.2025</div>
+                        <h3 class="project-title">Yumcup</h3>
                         <p class="project-description">
-                            실시간 데이터 분석 및 시각화 대시보드. 
-                            WebSocket을 활용한 라이브 업데이트로 
-                            복잡한 데이터를 직관적으로 표현합니다.
+                            위치 기반 음식점 추천 게임 서비스
                         </p>
+                        <ul class="project-highlights">
+                            <li>Kakao Map, Google Place API 연동 위치 기반 데이터 수집</li>
+                            <li>API 비동기 병렬 처리로 응답 시간 78% 단축 (9초 → 2초)</li>
+                            <li>Redis + Geohash 기반 중복 검사로 P95 응답 시간 97% 개선 (2000ms → 50ms)</li>
+                            <li>메모리 최적화 및 GC 튜닝으로 힙 사용량 1GB 절감</li>
+                        </ul>
                         <div class="project-tech">
-                            <span class="tech-badge">Vue.js</span>
-                            <span class="tech-badge">Python</span>
-                            <span class="tech-badge">PostgreSQL</span>
+                            <span class="tech-badge">Spring Boot</span>
                             <span class="tech-badge">Redis</span>
+                            <span class="tech-badge">Geohash</span>
+                            <span class="tech-badge">Kakao API</span>
+                            <span class="tech-badge">Google API</span>
                         </div>
                     </div>
                     <div class="project-visual"></div>
                 </div>
+            </div>
+        </section>
 
-                <div class="project-item">
-                    <div class="project-meta">
-                        <div class="project-number">03</div>
-                        <h3 class="project-title">Mobile Application</h3>
-                        <p class="project-description">
-                            크로스 플랫폼 모바일 앱 개발. 
-                            오프라인 지원, 푸시 알림, 생체 인증 등 
-                            모바일 네이티브 기능을 완벽하게 구현했습니다.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-badge">React Native</span>
-                            <span class="tech-badge">TypeScript</span>
-                            <span class="tech-badge">Firebase</span>
+        <!-- Open Source 섹션 -->
+        <section class="about" id="opensource">
+            <div class="about-container">
+                <div class="section-label">04 — Open Source</div>
+                <h2 class="section-title">오픈소스 기여</h2>
+                <div class="opensource-list">
+                    <div class="opensource-item">
+                        <div class="opensource-name">Hibernate ORM</div>
+                        <div class="opensource-pr">[HHH-19826]</div>
+                        <div class="opensource-desc">
+                            PostgreSQL 18 `array_reverse/sort` 함수를 5개 DB(PostgreSQL, CockroachDB, Oracle, HSQLDB, H2)에 
+                            호환 가능하도록 예측 레이어 구현
                         </div>
                     </div>
-                    <div class="project-visual"></div>
+
+                    <div class="opensource-item">
+                        <div class="opensource-name">Spring Integration</div>
+                        <div class="opensource-pr">[GH-10508]</div>
+                        <div class="opensource-desc">
+                            JdbcChannelMessageStore의 Java 직렬화 대신 Jackson JSON 직렬화/역직렬화 호환 구현 
+                            (PostgreSQL/MySQL/H2)
+                        </div>
+                    </div>
+
+                    <div class="opensource-item">
+                        <div class="opensource-name">Spring Boot</div>
+                        <div class="opensource-pr">[GH-40075]</div>
+                        <div class="opensource-desc">
+                            Configuration properties changelog generator에서 중복 deprecation 설명 항목 제거 로직 추가
+                        </div>
+                    </div>
+
+                    <div class="opensource-item">
+                        <div class="opensource-name">Logging-log4j2</div>
+                        <div class="opensource-pr">[GH-3921]</div>
+                        <div class="opensource-desc">
+                            Spring Boot의 프로필별 로그 설정 시 CompositeConfiguration 접근 API 개선
+                        </div>
+                    </div>
+
+                    <div class="opensource-item">
+                        <div class="opensource-name">Java Design Patterns</div>
+                        <div class="opensource-pr">[GH-3226]</div>
+                        <div class="opensource-desc">
+                            Thread-Pool Executor 패턴 예제에 스레드 풀 실행자 개념과 Runnable/Callable 차이 문서화
+                        </div>
+                    </div>
+
+                    <div class="opensource-item">
+                        <div class="opensource-name">Public-APIs-4kr (메인테이너)</div>
+                        <div class="opensource-pr">2.1k+ Stars</div>
+                        <div class="opensource-desc">
+                            한국 개발자를 위한 공개 API 오픈소스에서 카테고리별 API 문서화와 
+                            자동화된 링크 상태 검사 시스템을 구현하여 문서 신뢰성과 유지보수성 향상
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -970,20 +1099,18 @@
         <!-- Contact 섹션 -->
         <section class="contact" id="contact">
             <div class="contact-container">
-                <div class="section-label">04 — Get in Touch</div>
+                <div class="section-label">05 — Get in Touch</div>
                 <h2 class="contact-title">함께 일하실래요?</h2>
                 <p class="contact-text">
                     새로운 프로젝트나 협업 기회에 대해 이야기하고 싶으시다면 
-                    언제든지 연락 주세요. 48시간 내로 답변드리겠습니다.
+                    언제든지 연락 주세요!
                 </p>
-                <a href="mailto:your.email@example.com" class="contact-email">
-                    your.email@example.com
+                <a href="mailto:yunyubin54@gmail.com" class="contact-email">
+                    yunyubin54@gmail.com
                 </a>
                 <div class="social-grid">
-                    <a href="#" class="social-item">GH</a>
-                    <a href="#" class="social-item">LI</a>
-                    <a href="#" class="social-item">TW</a>
-                    <a href="#" class="social-item">DR</a>
+                    <a href="https://github.com/yunyubin54" target="_blank" class="social-item" title="GitHub">GH</a>
+                    <a href="https://www.linkedin.com/in/yunyubin54" target="_blank" class="social-item" title="LinkedIn">LI</a>
                 </div>
             </div>
         </section>
@@ -991,7 +1118,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Developer Portfolio. Crafted with passion and code.</p>
+        <p>&copy; 2026 Yunyubin (Mion). Backend Developer.</p>
     </footer>
 
     <script>
@@ -1016,7 +1143,8 @@
                     (index === 1 && current === 'about') ||
                     (index === 2 && current === 'skills') ||
                     (index === 3 && current === 'projects') ||
-                    (index === 4 && current === 'contact')) {
+                    (index === 4 && current === 'opensource') ||
+                    (index === 5 && current === 'contact')) {
                     dot.classList.add('active');
                 }
             });
@@ -1025,7 +1153,7 @@
         // 네비게이션 클릭
         navDots.forEach((dot, index) => {
             dot.addEventListener('click', () => {
-                const targets = ['hero', 'about', 'skills', 'projects', 'contact'];
+                const targets = ['hero', 'about', 'skills', 'projects', 'opensource', 'contact'];
                 const targetSection = document.querySelector(index === 0 ? '.hero' : `#${targets[index]}`);
                 if (targetSection) {
                     targetSection.scrollIntoView({ behavior: 'smooth' });
@@ -1048,7 +1176,7 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.skill-card, .project-item, .stat-item').forEach(el => {
+        document.querySelectorAll('.skill-card, .project-item, .stat-item, .opensource-item').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'all 0.6s ease';
