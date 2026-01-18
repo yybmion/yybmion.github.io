@@ -3,293 +3,441 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>개발자 포트폴리오</title>
+    <title>개발자 포트폴리오 - Dark v2</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-primary: #0a0e14;
-            --bg-secondary: #141820;
-            --bg-tertiary: #1c222e;
-            --accent-primary: #00d9ff;
-            --accent-secondary: #ff6b9d;
-            --accent-tertiary: #a855f7;
-            --text-primary: #e6e9f0;
-            --text-secondary: #9ca3af;
-            --border-color: rgba(255, 255, 255, 0.1);
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'JetBrains Mono', monospace;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
+        :root {
+            --bg-deep: #0d0d0d;
+            --bg-dark: #1a1a1a;
+            --bg-card: #1f1f1f;
+            --accent-purple: #a78bfa;
+            --accent-blue: #60a5fa;
+            --accent-green: #34d399;
+            --text-primary: #f5f5f5;
+            --text-secondary: #a1a1aa;
+            --border: rgba(255, 255, 255, 0.1);
         }
 
-        /* 배경 그리드 효과 */
-        body::before {
-            content: '';
+        body {
+            font-family: 'IBM Plex Mono', monospace;
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* 글로우 배경 효과 */
+        .glow-bg {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                linear-gradient(90deg, rgba(0, 217, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(rgba(0, 217, 255, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.15;
             pointer-events: none;
             z-index: 0;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 1;
+        .glow-1 {
+            background: var(--accent-purple);
+            top: -200px;
+            right: -200px;
+            animation: float 20s ease-in-out infinite;
         }
 
-        /* 네비게이션 */
-        nav {
+        .glow-2 {
+            background: var(--accent-blue);
+            bottom: -200px;
+            left: -200px;
+            animation: float 25s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            33% { transform: translate(100px, -100px); }
+            66% { transform: translate(-100px, 100px); }
+        }
+
+        /* 사이드 네비게이션 */
+        .side-nav {
             position: fixed;
-            top: 0;
             left: 0;
-            right: 0;
-            background: rgba(10, 14, 20, 0.8);
+            top: 0;
+            height: 100vh;
+            width: 80px;
+            background: rgba(26, 26, 26, 0.8);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 100;
-            padding: 1.5rem 0;
-        }
-
-        nav .container {
+            border-right: 1px solid var(--border);
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
+            padding: 2rem 0;
+            z-index: 1000;
         }
 
-        .logo {
-            font-family: 'Playfair Display', serif;
+        .nav-logo {
+            font-family: 'Syne', sans-serif;
             font-size: 1.5rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            font-weight: 800;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            background: linear-gradient(180deg, var(--accent-purple), var(--accent-blue));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            margin-bottom: 3rem;
         }
 
-        .nav-links {
+        .nav-dots {
             display: flex;
-            gap: 2rem;
-            list-style: none;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: auto;
         }
 
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.9rem;
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--text-secondary);
+            border-radius: 50%;
+            cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
         }
 
-        .nav-links a::after {
-            content: '';
+        .nav-dot.active {
+            background: var(--accent-purple);
+            box-shadow: 0 0 20px var(--accent-purple);
+        }
+
+        .nav-dot:hover {
+            transform: scale(1.5);
+            background: var(--accent-blue);
+        }
+
+        .nav-dot::before {
+            content: attr(data-label);
             position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-primary);
-            transition: width 0.3s ease;
+            left: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            white-space: nowrap;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
         }
 
-        .nav-links a:hover {
-            color: var(--text-primary);
+        .nav-dot:hover::before {
+            opacity: 1;
         }
 
-        .nav-links a:hover::after {
-            width: 100%;
+        /* 메인 컨테이너 */
+        .main-container {
+            margin-left: 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 섹션 공통 */
+        section {
+            min-height: 100vh;
+            padding: 4rem 6rem;
+            display: flex;
+            align-items: center;
         }
 
         /* Hero 섹션 */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             position: relative;
-            padding-top: 80px;
         }
 
-        .hero-content {
-            text-align: center;
-            animation: fadeInUp 1s ease;
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+            max-width: 1400px;
         }
 
-        .hero-subtitle {
-            color: var(--accent-primary);
-            font-size: 0.9rem;
-            letter-spacing: 3px;
-            margin-bottom: 1rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.2s forwards;
-        }
-
-        .hero-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 5rem;
-            font-weight: 900;
+        .hero-content h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(3rem, 6vw, 6rem);
+            font-weight: 800;
             line-height: 1.1;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--text-primary), var(--accent-primary));
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .hero-content h1 .gradient-text {
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue), var(--accent-green));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.4s forwards;
+            background-size: 200% 100%;
+            animation: gradientShift 8s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         .hero-description {
             font-size: 1.1rem;
             color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.6s forwards;
+            margin-bottom: 3rem;
+            max-width: 500px;
+            line-height: 1.8;
         }
 
-        .cta-buttons {
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .stat-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            border-color: var(--accent-purple);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(167, 139, 250, 0.2);
+        }
+
+        .stat-number {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-visual {
+            position: relative;
+            height: 600px;
+        }
+
+        .code-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            font-size: 0.9rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .code-header {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .code-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .code-dot:nth-child(1) { background: #ff5f56; }
+        .code-dot:nth-child(2) { background: #ffbd2e; }
+        .code-dot:nth-child(3) { background: #27c93f; }
+
+        .code-line {
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            animation: fadeInCode 0.5s ease forwards;
+        }
+
+        .code-line:nth-child(1) { animation-delay: 0.1s; }
+        .code-line:nth-child(2) { animation-delay: 0.2s; }
+        .code-line:nth-child(3) { animation-delay: 0.3s; }
+        .code-line:nth-child(4) { animation-delay: 0.4s; }
+        .code-line:nth-child(5) { animation-delay: 0.5s; }
+        .code-line:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeInCode {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .code-keyword { color: var(--accent-purple); }
+        .code-function { color: var(--accent-blue); }
+        .code-string { color: var(--accent-green); }
+        .code-comment { color: var(--text-secondary); font-style: italic; }
+
+        .cta-group {
             display: flex;
             gap: 1rem;
-            justify-content: center;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.8s forwards;
+            margin-top: 3rem;
         }
 
         .btn {
             padding: 1rem 2rem;
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 0.9rem;
             font-weight: 600;
             text-decoration: none;
-            border: 2px solid;
             border-radius: 8px;
-            cursor: pointer;
             transition: all 0.3s ease;
+            cursor: pointer;
             position: relative;
             overflow: hidden;
         }
 
         .btn-primary {
-            background: var(--accent-primary);
-            color: var(--bg-primary);
-            border-color: var(--accent-primary);
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            color: var(--bg-deep);
+            border: none;
         }
 
         .btn-primary::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
+            inset: 0;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .btn-primary:hover::before {
-            left: 100%;
+            opacity: 1;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+        .btn-primary span {
+            position: relative;
+            z-index: 1;
         }
 
         .btn-secondary {
             background: transparent;
+            border: 1px solid var(--border);
             color: var(--text-primary);
-            border-color: var(--border-color);
         }
 
         .btn-secondary:hover {
-            background: var(--bg-tertiary);
-            border-color: var(--accent-primary);
-        }
-
-        /* 섹션 공통 스타일 */
-        section {
-            padding: 6rem 0;
-            position: relative;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            font-weight: 900;
-            margin-bottom: 3rem;
-            text-align: center;
-            background: linear-gradient(135deg, var(--text-primary), var(--accent-primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            border-color: var(--accent-purple);
+            background: rgba(167, 139, 250, 0.1);
         }
 
         /* About 섹션 */
-        .about-content {
+        .about {
+            background: var(--bg-dark);
+        }
+
+        .about-container {
+            max-width: 1400px;
+            width: 100%;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent-purple);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 3rem;
+        }
+
+        .about-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1.2fr 1fr;
             gap: 4rem;
-            align-items: center;
+            align-items: start;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: var(--text-secondary);
         }
 
         .about-text p {
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-            font-size: 1rem;
-            line-height: 1.8;
+            margin-bottom: 1.5rem;
         }
 
-        .about-image {
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            aspect-ratio: 1;
-            border-radius: 20px;
-            position: relative;
-            overflow: hidden;
+        .about-text .highlight {
+            color: var(--text-primary);
+            font-weight: 600;
         }
 
-        .about-image::before {
-            content: '';
-            position: absolute;
-            inset: 2px;
-            background: var(--bg-secondary);
-            border-radius: 18px;
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .skill-tag {
+            padding: 0.5rem 1rem;
+            background: rgba(167, 139, 250, 0.1);
+            border: 1px solid rgba(167, 139, 250, 0.3);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--accent-purple);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(167, 139, 250, 0.2);
+            border-color: var(--accent-purple);
+            transform: translateY(-2px);
         }
 
         /* Skills 섹션 */
+        .skills-container {
+            max-width: 1400px;
+            width: 100%;
+        }
+
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
         }
 
         .skill-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 2rem;
-            transition: all 0.3s ease;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
             position: relative;
             overflow: hidden;
+            transition: all 0.3s ease;
         }
 
         .skill-card::before {
@@ -297,12 +445,12 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
+            right: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue));
             transform: scaleX(0);
             transform-origin: left;
-            transition: transform 0.3s ease;
+            transition: transform 0.5s ease;
         }
 
         .skill-card:hover::before {
@@ -310,422 +458,582 @@
         }
 
         .skill-card:hover {
+            border-color: var(--accent-purple);
             transform: translateY(-5px);
-            border-color: var(--accent-primary);
-            box-shadow: 0 10px 40px rgba(0, 217, 255, 0.1);
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 2rem;
+        }
+
+        .skill-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
         }
 
         .skill-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--accent-primary);
+            font-size: 2rem;
+            opacity: 0.5;
         }
 
-        .skill-name {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
+        .skill-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
         }
 
-        .skill-description {
+        .skill-list li {
+            font-size: 0.95rem;
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .skill-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent-purple);
         }
 
         /* Projects 섹션 */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
+        .projects {
+            background: var(--bg-dark);
         }
 
-        .project-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            overflow: hidden;
+        .projects-container {
+            max-width: 1400px;
+            width: 100%;
+        }
+
+        .project-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 3rem;
+            align-items: center;
             transition: all 0.3s ease;
             cursor: pointer;
         }
 
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(0, 217, 255, 0.15);
+        .project-item:hover {
+            border-color: var(--accent-purple);
+            transform: translateX(10px);
+            box-shadow: 0 10px 50px rgba(167, 139, 250, 0.2);
         }
 
-        .project-image {
-            height: 200px;
-            background: linear-gradient(135deg, var(--accent-tertiary), var(--accent-secondary));
-            position: relative;
+        .project-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
 
-        .project-image::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.3);
-        }
-
-        .project-content {
-            padding: 2rem;
+        .project-number {
+            font-family: 'Syne', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
         }
 
         .project-title {
-            font-size: 1.3rem;
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
+            margin-bottom: 1rem;
         }
 
         .project-description {
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
         }
 
-        .project-tags {
+        .project-tech {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
         }
 
-        .tag {
+        .tech-badge {
             padding: 0.3rem 0.8rem;
-            background: rgba(0, 217, 255, 0.1);
-            color: var(--accent-primary);
-            border-radius: 20px;
+            background: rgba(96, 165, 250, 0.1);
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            border-radius: 4px;
             font-size: 0.8rem;
-            border: 1px solid rgba(0, 217, 255, 0.2);
+            color: var(--accent-blue);
+        }
+
+        .project-visual {
+            height: 250px;
+            background: linear-gradient(135deg, rgba(167, 139, 250, 0.1), rgba(96, 165, 250, 0.1));
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-visual::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(167, 139, 250, 0.1) 2px,
+                    rgba(167, 139, 250, 0.1) 4px
+                );
         }
 
         /* Contact 섹션 */
-        .contact-content {
-            max-width: 600px;
-            margin: 0 auto;
+        .contact-container {
+            max-width: 1400px;
+            width: 100%;
             text-align: center;
         }
 
-        .contact-text {
-            color: var(--text-secondary);
+        .contact-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
             margin-bottom: 2rem;
-            font-size: 1.1rem;
         }
 
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .social-link {
-            width: 60px;
-            height: 60px;
-            border: 2px solid var(--border-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .contact-text {
+            font-size: 1.2rem;
             color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+
+        .contact-email {
+            display: inline-block;
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
             text-decoration: none;
-            font-size: 1.5rem;
+            border-bottom: 2px solid var(--accent-purple);
+            padding-bottom: 0.5rem;
+            margin-bottom: 3rem;
             transition: all 0.3s ease;
         }
 
-        .social-link:hover {
-            border-color: var(--accent-primary);
-            color: var(--accent-primary);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2);
+        .contact-email:hover {
+            color: var(--accent-purple);
+            border-bottom-width: 4px;
+        }
+
+        .social-grid {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .social-item {
+            width: 60px;
+            height: 60px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-item:hover {
+            background: var(--accent-purple);
+            color: var(--bg-deep);
+            border-color: var(--accent-purple);
+            transform: translateY(-5px) rotate(5deg);
         }
 
         /* Footer */
         footer {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
-            padding: 2rem 0;
+            background: var(--bg-deep);
+            border-top: 1px solid var(--border);
+            padding: 2rem 6rem;
+            margin-left: 80px;
             text-align: center;
             color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        /* 애니메이션 */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            font-size: 0.85rem;
         }
 
         /* 반응형 */
+        @media (max-width: 1024px) {
+            .side-nav {
+                width: 60px;
+                padding: 1rem 0;
+            }
+
+            .main-container {
+                margin-left: 60px;
+            }
+
+            section {
+                padding: 3rem 3rem;
+            }
+
+            .hero-grid,
+            .about-grid,
+            .project-item {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                margin-left: 60px;
+                padding: 2rem 3rem;
+            }
+        }
+
         @media (max-width: 768px) {
-            .hero-title {
-                font-size: 3rem;
+            .side-nav {
+                display: none;
             }
 
-            .about-content {
+            .main-container {
+                margin-left: 0;
+            }
+
+            section {
+                padding: 2rem 1.5rem;
+            }
+
+            .hero-stats {
                 grid-template-columns: 1fr;
             }
 
-            .nav-links {
-                gap: 1rem;
+            footer {
+                margin-left: 0;
+                padding: 2rem 1.5rem;
             }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-            }
-        }
-
-        /* 스크롤 바 스타일링 */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-primary);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--accent-primary);
-            border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-secondary);
         }
     </style>
 </head>
 <body>
-    <!-- 네비게이션 -->
-    <nav>
-        <div class="container">
-            <div class="logo">DEV</div>
-            <ul class="nav-links">
-                <li><a href="#home">홈</a></li>
-                <li><a href="#about">소개</a></li>
-                <li><a href="#skills">기술</a></li>
-                <li><a href="#projects">프로젝트</a></li>
-                <li><a href="#contact">연락</a></li>
-            </ul>
+    <!-- 글로우 배경 -->
+    <div class="glow-bg glow-1"></div>
+    <div class="glow-bg glow-2"></div>
+
+    <!-- 사이드 네비게이션 -->
+    <nav class="side-nav">
+        <div class="nav-logo">DEV</div>
+        <div class="nav-dots">
+            <div class="nav-dot active" data-label="Home"></div>
+            <div class="nav-dot" data-label="About"></div>
+            <div class="nav-dot" data-label="Skills"></div>
+            <div class="nav-dot" data-label="Projects"></div>
+            <div class="nav-dot" data-label="Contact"></div>
         </div>
     </nav>
 
-    <!-- Hero 섹션 -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-subtitle">DEVELOPER PORTFOLIO</div>
-                <h1 class="hero-title">안녕하세요,<br>개발자입니다</h1>
-                <p class="hero-description">
-                    사용자 경험과 성능을 중시하는 풀스택 개발자입니다. 
-                    깔끔한 코드와 혁신적인 솔루션으로 문제를 해결합니다.
-                </p>
-                <div class="cta-buttons">
-                    <a href="#projects" class="btn btn-primary">프로젝트 보기</a>
-                    <a href="#contact" class="btn btn-secondary">연락하기</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About 섹션 -->
-    <section id="about">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>
-                        저는 사용자 중심의 웹 애플리케이션을 만드는 것을 좋아하는 개발자입니다. 
-                        새로운 기술을 배우고 적용하는 것을 즐기며, 팀과 협업하여 
-                        더 나은 제품을 만들기 위해 노력합니다.
+    <!-- 메인 컨테이너 -->
+    <div class="main-container">
+        <!-- Hero 섹션 -->
+        <section class="hero">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h1>
+                        Building the<br>
+                        <span class="gradient-text">Future of Web</span>
+                    </h1>
+                    <p class="hero-description">
+                        풀스택 개발자로서 최신 기술을 활용하여 혁신적인 웹 경험을 창조합니다. 
+                        사용자 중심의 설계와 확장 가능한 아키텍처가 저의 강점입니다.
                     </p>
-                    <p>
-                        프론트엔드부터 백엔드까지 다양한 기술 스택을 다룰 수 있으며, 
-                        특히 깔끔하고 유지보수가 쉬운 코드를 작성하는 데 집중합니다.
-                    </p>
-                    <p>
-                        끊임없이 성장하며, 코드를 통해 세상에 긍정적인 영향을 미치고 싶습니다.
-                    </p>
-                </div>
-                <div class="about-image"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills 섹션 -->
-    <section id="skills">
-        <div class="container">
-            <h2 class="section-title">Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <div class="skill-icon">⚡</div>
-                    <h3 class="skill-name">Frontend</h3>
-                    <p class="skill-description">
-                        React, Vue.js, HTML5, CSS3, JavaScript, TypeScript
-                    </p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🚀</div>
-                    <h3 class="skill-name">Backend</h3>
-                    <p class="skill-description">
-                        Node.js, Python, Django, Express, RESTful API
-                    </p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">💾</div>
-                    <h3 class="skill-name">Database</h3>
-                    <p class="skill-description">
-                        MongoDB, PostgreSQL, MySQL, Redis
-                    </p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🛠️</div>
-                    <h3 class="skill-name">DevOps</h3>
-                    <p class="skill-description">
-                        Docker, AWS, Git, CI/CD, Linux
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects 섹션 -->
-    <section id="projects">
-        <div class="container">
-            <h2 class="section-title">Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image"></div>
-                    <div class="project-content">
-                        <h3 class="project-title">프로젝트 1</h3>
-                        <p class="project-description">
-                            혁신적인 웹 애플리케이션으로 사용자 경험을 개선했습니다. 
-                            최신 기술 스택을 활용하여 성능과 확장성을 확보했습니다.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag">React</span>
-                            <span class="tag">Node.js</span>
-                            <span class="tag">MongoDB</span>
+                    <div class="cta-group">
+                        <a href="#projects" class="btn btn-primary"><span>프로젝트 보기</span></a>
+                        <a href="#contact" class="btn btn-secondary">연락하기</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">5+</div>
+                            <div class="stat-label">Years Exp</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Projects</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">98%</div>
+                            <div class="stat-label">Satisfied</div>
                         </div>
                     </div>
                 </div>
-                <div class="project-card">
-                    <div class="project-image"></div>
-                    <div class="project-content">
-                        <h3 class="project-title">프로젝트 2</h3>
-                        <p class="project-description">
-                            실시간 데이터 처리 시스템을 구축하여 업무 효율성을 50% 향상시켰습니다.
-                            확장 가능한 아키텍처로 설계했습니다.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">Django</span>
-                            <span class="tag">PostgreSQL</span>
+                <div class="hero-visual">
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
+                            <div class="code-dot"></div>
                         </div>
+                        <div class="code-line"><span class="code-keyword">const</span> developer = {</div>
+                        <div class="code-line">  <span class="code-function">name</span>: <span class="code-string">'Full Stack Developer'</span>,</div>
+                        <div class="code-line">  <span class="code-function">skills</span>: [<span class="code-string">'React'</span>, <span class="code-string">'Node.js'</span>, <span class="code-string">'Python'</span>],</div>
+                        <div class="code-line">  <span class="code-function">passion</span>: <span class="code-string">'Building amazing things'</span>,</div>
+                        <div class="code-line">  <span class="code-function">status</span>: <span class="code-string">'Available for hire'</span></div>
+                        <div class="code-line">};</div>
+                        <div class="code-line"><span class="code-comment">// Let's create something amazing together</span></div>
                     </div>
                 </div>
-                <div class="project-card">
-                    <div class="project-image"></div>
-                    <div class="project-content">
-                        <h3 class="project-title">프로젝트 3</h3>
-                        <p class="project-description">
-                            모바일 우선 반응형 웹사이트를 개발하여 모든 디바이스에서 
-                            완벽한 사용자 경험을 제공합니다.
+            </div>
+        </section>
+
+        <!-- About 섹션 -->
+        <section class="about" id="about">
+            <div class="about-container">
+                <div class="section-label">01 — About Me</div>
+                <h2 class="section-title">나를 소개합니다</h2>
+                <div class="about-grid">
+                    <div class="about-text">
+                        <p>
+                            안녕하세요! 저는 <span class="highlight">사용자 경험을 최우선</span>으로 생각하며 
+                            기술적 완성도를 추구하는 풀스택 개발자입니다.
                         </p>
-                        <div class="project-tags">
-                            <span class="tag">Vue.js</span>
-                            <span class="tag">Tailwind</span>
-                            <span class="tag">Firebase</span>
+                        <p>
+                            프론트엔드부터 백엔드, 데이터베이스, 그리고 클라우드 인프라까지 
+                            <span class="highlight">전체 스택을 이해하고 구현</span>할 수 있습니다. 
+                            특히 성능 최적화와 확장 가능한 아키텍처 설계에 강점이 있습니다.
+                        </p>
+                        <p>
+                            새로운 기술을 빠르게 습득하고 적용하는 것을 즐기며, 
+                            팀과의 협업을 통해 더 나은 결과물을 만들어내는 것을 중요하게 생각합니다.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Problem Solver</span>
+                            <span class="skill-tag">Fast Learner</span>
+                            <span class="skill-tag">Team Player</span>
+                            <span class="skill-tag">Detail Oriented</span>
+                            <span class="skill-tag">Creative Thinker</span>
+                            <span class="skill-tag">Performance Focused</span>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Contact 섹션 -->
-    <section id="contact">
-        <div class="container">
-            <h2 class="section-title">Contact</h2>
-            <div class="contact-content">
+        <!-- Skills 섹션 -->
+        <section class="skills" id="skills">
+            <div class="skills-container">
+                <div class="section-label">02 — My Skills</div>
+                <h2 class="section-title">기술 스택</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <h3 class="skill-title">Frontend</h3>
+                            <div class="skill-icon">⚡</div>
+                        </div>
+                        <ul class="skill-list">
+                            <li>React.js & Next.js</li>
+                            <li>Vue.js & Nuxt.js</li>
+                            <li>TypeScript & JavaScript</li>
+                            <li>Tailwind CSS & Styled Components</li>
+                            <li>Redux & State Management</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <h3 class="skill-title">Backend</h3>
+                            <div class="skill-icon">🚀</div>
+                        </div>
+                        <ul class="skill-list">
+                            <li>Node.js & Express</li>
+                            <li>Python & Django</li>
+                            <li>RESTful API Design</li>
+                            <li>GraphQL</li>
+                            <li>Microservices Architecture</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <h3 class="skill-title">Database</h3>
+                            <div class="skill-icon">💾</div>
+                        </div>
+                        <ul class="skill-list">
+                            <li>PostgreSQL & MySQL</li>
+                            <li>MongoDB</li>
+                            <li>Redis</li>
+                            <li>Database Optimization</li>
+                            <li>Data Modeling</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <h3 class="skill-title">DevOps</h3>
+                            <div class="skill-icon">🛠️</div>
+                        </div>
+                        <ul class="skill-list">
+                            <li>Docker & Kubernetes</li>
+                            <li>AWS & Google Cloud</li>
+                            <li>CI/CD Pipelines</li>
+                            <li>Git & GitHub Actions</li>
+                            <li>Linux Administration</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects 섹션 -->
+        <section class="projects" id="projects">
+            <div class="projects-container">
+                <div class="section-label">03 — My Work</div>
+                <h2 class="section-title">주요 프로젝트</h2>
+
+                <div class="project-item">
+                    <div class="project-meta">
+                        <div class="project-number">01</div>
+                        <h3 class="project-title">E-Commerce Platform</h3>
+                        <p class="project-description">
+                            대규모 B2C 전자상거래 플랫폼 개발. 
+                            실시간 재고 관리, 결제 시스템, 추천 알고리즘을 구현하여 
+                            월 100만 명의 사용자를 처리합니다.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-badge">React</span>
+                            <span class="tech-badge">Node.js</span>
+                            <span class="tech-badge">MongoDB</span>
+                            <span class="tech-badge">AWS</span>
+                        </div>
+                    </div>
+                    <div class="project-visual"></div>
+                </div>
+
+                <div class="project-item">
+                    <div class="project-meta">
+                        <div class="project-number">02</div>
+                        <h3 class="project-title">Analytics Dashboard</h3>
+                        <p class="project-description">
+                            실시간 데이터 분석 및 시각화 대시보드. 
+                            WebSocket을 활용한 라이브 업데이트로 
+                            복잡한 데이터를 직관적으로 표현합니다.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-badge">Vue.js</span>
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">PostgreSQL</span>
+                            <span class="tech-badge">Redis</span>
+                        </div>
+                    </div>
+                    <div class="project-visual"></div>
+                </div>
+
+                <div class="project-item">
+                    <div class="project-meta">
+                        <div class="project-number">03</div>
+                        <h3 class="project-title">Mobile Application</h3>
+                        <p class="project-description">
+                            크로스 플랫폼 모바일 앱 개발. 
+                            오프라인 지원, 푸시 알림, 생체 인증 등 
+                            모바일 네이티브 기능을 완벽하게 구현했습니다.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-badge">React Native</span>
+                            <span class="tech-badge">TypeScript</span>
+                            <span class="tech-badge">Firebase</span>
+                        </div>
+                    </div>
+                    <div class="project-visual"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact 섹션 -->
+        <section class="contact" id="contact">
+            <div class="contact-container">
+                <div class="section-label">04 — Get in Touch</div>
+                <h2 class="contact-title">함께 일하실래요?</h2>
                 <p class="contact-text">
                     새로운 프로젝트나 협업 기회에 대해 이야기하고 싶으시다면 
-                    언제든지 연락주세요!
+                    언제든지 연락 주세요. 48시간 내로 답변드리겠습니다.
                 </p>
-                <a href="mailto:your.email@example.com" class="btn btn-primary">이메일 보내기</a>
-                <div class="social-links">
-                    <a href="#" class="social-link" title="GitHub">
-                        <span>G</span>
-                    </a>
-                    <a href="#" class="social-link" title="LinkedIn">
-                        <span>L</span>
-                    </a>
-                    <a href="#" class="social-link" title="Twitter">
-                        <span>T</span>
-                    </a>
+                <a href="mailto:your.email@example.com" class="contact-email">
+                    your.email@example.com
+                </a>
+                <div class="social-grid">
+                    <a href="#" class="social-item">GH</a>
+                    <a href="#" class="social-item">LI</a>
+                    <a href="#" class="social-item">TW</a>
+                    <a href="#" class="social-item">DR</a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
     <!-- Footer -->
     <footer>
-        <div class="container">
-            <p>&copy; 2026 Developer Portfolio. All rights reserved.</p>
-        </div>
+        <p>&copy; 2026 Developer Portfolio. Crafted with passion and code.</p>
     </footer>
 
     <script>
-        // 부드러운 스크롤
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // 스크롤 시 네비게이션 활성화
+        // 네비게이션 활성화
         const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('.nav-links a');
+        const navDots = document.querySelectorAll('.nav-dot');
 
         window.addEventListener('scroll', () => {
             let current = '';
+            
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.clientHeight;
-                if (pageYOffset >= sectionTop - 200) {
+                if (pageYOffset >= sectionTop - 300) {
                     current = section.getAttribute('id');
                 }
             });
 
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').slice(1) === current) {
-                    link.classList.add('active');
+            navDots.forEach((dot, index) => {
+                dot.classList.remove('active');
+                if ((index === 0 && !current) || 
+                    (index === 1 && current === 'about') ||
+                    (index === 2 && current === 'skills') ||
+                    (index === 3 && current === 'projects') ||
+                    (index === 4 && current === 'contact')) {
+                    dot.classList.add('active');
                 }
             });
         });
 
-        // Intersection Observer로 섹션 애니메이션
+        // 네비게이션 클릭
+        navDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                const targets = ['hero', 'about', 'skills', 'projects', 'contact'];
+                const targetSection = document.querySelector(index === 0 ? '.hero' : `#${targets[index]}`);
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // 스크롤 애니메이션
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -100px 0px'
@@ -740,7 +1048,7 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.skill-card, .project-card').forEach(el => {
+        document.querySelectorAll('.skill-card, .project-item, .stat-item').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'all 0.6s ease';
