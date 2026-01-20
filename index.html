@@ -311,6 +311,7 @@
             display: flex;
             gap: 1rem;
             margin-top: 3rem;
+            flex-wrap: wrap;
         }
 
         .btn {
@@ -470,6 +471,70 @@
             font-size: 0.95rem;
             color: var(--text-secondary);
             line-height: 1.7;
+        }
+
+        /* 개발 로그 섹션 */
+        .devlog-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .devlog-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .devlog-item:hover {
+            border-color: var(--accent-blue);
+            transform: translateX(10px);
+        }
+
+        .devlog-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .devlog-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .devlog-date {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            letter-spacing: 1px;
+        }
+
+        .devlog-excerpt {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .devlog-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .devlog-tag {
+            padding: 0.3rem 0.8rem;
+            background: rgba(96, 165, 250, 0.1);
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            color: var(--accent-blue);
         }
 
         /* Skills 섹션 */
@@ -829,6 +894,7 @@
             <div class="nav-dot" data-label="Skills"></div>
             <div class="nav-dot" data-label="Projects"></div>
             <div class="nav-dot" data-label="OpenSource"></div>
+            <div class="nav-dot" data-label="DevLog"></div>
             <div class="nav-dot" data-label="Contact"></div>
         </div>
     </nav>
@@ -845,12 +911,16 @@
                     </h1>
                     <div class="hero-subtitle">Backend Developer</div>
                     <p class="hero-description">
-                        기술 도입에 대한 토론과 오픈소스 분석을 즐기는 백엔드 개발자입니다.
-                        제 궁극적인 목표는 개발자들에게 혁신적인 경험을 제공하는 오픈소스를 만드는 것입니다.
+                        기술 도입 토론과 오픈소스 분석을 즐기는 
+                        백엔드 개발자입니다. 개발자들에게 혁신적인 경험을 제공하는 오픈소스를 만드는 것이 목표입니다.
                     </p>
                     <div class="cta-group">
-                        <a href="#projects" class="btn btn-primary"><span>프로젝트 보기</span></a>
-                        <a href="#contact" class="btn btn-secondary">연락하기</a>
+                        <a href="#about" class="btn btn-secondary">소개</a>
+                        <a href="#skills" class="btn btn-secondary">기술 스택</a>
+                        <a href="#projects" class="btn btn-secondary">프로젝트</a>
+                        <a href="#opensource" class="btn btn-secondary">오픈소스</a>
+                        <a href="#devlog" class="btn btn-secondary">개발 로그</a>
+                        <a href="#contact" class="btn btn-secondary">연락</a>
                     </div>
                 </div>
                 <div class="hero-visual">
@@ -902,16 +972,7 @@
                             커뮤니티에 기여하고 기술적 성장을 이어가고 있습니다.
                         </p>
                     </div>
-                    <div>
-                        <div class="skill-tags">
-                            <span class="skill-tag">Performance Tuning</span>
-                            <span class="skill-tag">Problem Solver</span>
-                            <span class="skill-tag">Algorithm</span>
-                            <span class="skill-tag">Real-time System</span>
-                            <span class="skill-tag">Open Source</span>
-                            <span class="skill-tag">Cache Strategy</span>
-                        </div>
-                    </div>
+                    <div></div>
                 </div>
             </div>
         </section>
@@ -1096,11 +1157,38 @@
             </div>
         </section>
 
+        <!-- 개발 로그 섹션 -->
+        <section class="projects" id="devlog">
+            <div class="projects-container">
+                <div class="section-label">05 — Dev Log</div>
+                <h2 class="section-title">개발 로그</h2>
+                <div class="devlog-list">
+                    <a href="/dev_log/26_01_20.md" class="devlog-link">
+                        <div class="devlog-item">
+                            <div class="devlog-header">
+                                <h3 class="devlog-title">MariaDB 10.x에서 Correlated DELETE/UPDATE를 처리하는 방법 (Hibernate 관점)</h3>
+                                <span class="devlog-date">2025.01.20</span>
+                            </div>
+                            <p class="devlog-excerpt">
+                                MariaDB 10.x에서 correlated DELETE/UPDATE가 실패하는 이유를 분석하고, Hibernate ORM에서 이를 우회하기 위해 어떤 설계 선택을 했는지를 정리합니다.
+                            </p>
+                            <div class="devlog-tags">
+                                <span class="devlog-tag">Hibernate-ORM</span>
+                                <span class="devlog-tag">MariaDB</span>
+                                <span class="devlog-tag">Version</span>
+                                <span class="devlog-tag">Correlation</span>
+                            </div>
+                        </div>
+                    </a>    
+                </div>
+            </div>
+        </section>
+
         <!-- Contact 섹션 -->
         <section class="contact" id="contact">
             <div class="contact-container">
-                <div class="section-label">05 — Get in Touch</div>
-                <h2 class="contact-title">함께 일하실래요?</h2>
+                <div class="section-label">06 — Get in Touch</div>
+                <h2 class="contact-title">함께 일할 준비가 되어 있습니다</h2>
                 <p class="contact-text">
                     새로운 프로젝트나 협업 기회에 대해 이야기하고 싶으시다면 
                     언제든지 연락 주세요!
@@ -1109,8 +1197,8 @@
                     yunyubin54@gmail.com
                 </a>
                 <div class="social-grid">
-                    <a href="https://github.com/yunyubin54" target="_blank" class="social-item" title="GitHub">GH</a>
-                    <a href="https://www.linkedin.com/in/yunyubin54" target="_blank" class="social-item" title="LinkedIn">LI</a>
+                    <a href="https://github.com/yybmion" target="_blank" class="social-item" title="GitHub">GH</a>
+                    <a href="https://www.linkedin.com/in/yybmion/" target="_blank" class="social-item" title="LinkedIn">LI</a>
                 </div>
             </div>
         </section>
@@ -1144,7 +1232,8 @@
                     (index === 2 && current === 'skills') ||
                     (index === 3 && current === 'projects') ||
                     (index === 4 && current === 'opensource') ||
-                    (index === 5 && current === 'contact')) {
+                    (index === 5 && current === 'devlog') ||
+                    (index === 6 && current === 'contact')) {
                     dot.classList.add('active');
                 }
             });
@@ -1153,7 +1242,7 @@
         // 네비게이션 클릭
         navDots.forEach((dot, index) => {
             dot.addEventListener('click', () => {
-                const targets = ['hero', 'about', 'skills', 'projects', 'opensource', 'contact'];
+                const targets = ['hero', 'about', 'skills', 'projects', 'opensource', 'devlog', 'contact'];
                 const targetSection = document.querySelector(index === 0 ? '.hero' : `#${targets[index]}`);
                 if (targetSection) {
                     targetSection.scrollIntoView({ behavior: 'smooth' });
@@ -1176,7 +1265,7 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.skill-card, .project-item, .stat-item, .opensource-item').forEach(el => {
+        document.querySelectorAll('.skill-card, .project-item, .stat-item, .opensource-item, .devlog-item').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'all 0.6s ease';
