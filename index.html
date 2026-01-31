@@ -23,7 +23,7 @@
             --accent-blue: #60a5fa;
             --accent-green: #34d399;
             --text-primary: #f5f5f5;
-            --text-secondary: #a1a1aa;
+            --text-secondary: #c9c9cd;
             --border: rgba(255, 255, 255, 0.1);
         }
 
@@ -541,7 +541,7 @@
 
         .opensource-text .highlight {
             color: var(--text-primary);
-            font-weight: 550;
+            font-weight: 600;
         }
 
         .opensource-item:hover {
@@ -745,7 +745,7 @@
 
         .projects-text .highlight {
             color: var(--text-primary);
-            font-weight: 550;
+            font-weight: 600;
         }
 
         .project-item {
@@ -760,12 +760,34 @@
             align-items: center;
             transition: all 0.3s ease;
             cursor: pointer;
+            position: relative;
         }
 
         .project-item:hover {
             border-color: var(--accent-purple);
             transform: translateX(10px);
             box-shadow: 0 10px 50px rgba(167, 139, 250, 0.2);
+        }
+
+        .project-icon {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+
+        .project-icon img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .project-item:hover .project-icon {
+            opacity: 1;
+            transform: scale(1.05);
         }
 
         .project-meta {
@@ -838,6 +860,48 @@
             border-radius: 4px;
             font-size: 0.8rem;
             color: var(--accent-blue);
+        }
+
+        .project-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .project-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-btn-primary {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            color: var(--text-primary);
+            border: none;
+        }
+
+        .project-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(167, 139, 250, 0.4);
+        }
+
+        .project-btn-secondary {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .project-btn-secondary:hover {
+            border-color: var(--accent-purple);
+            color: var(--accent-purple);
+            transform: translateY(-2px);
         }
 
         .project-visual {
@@ -1244,7 +1308,10 @@
             <div class="section-label">03 — Projects</div>
             <h2 class="section-title">주요 프로젝트</h2>
             <div class="projects-text">
-                <div class="project-item" onclick="location.href='project-athens.html'">
+                <div class="project-item" onclick="location.href='https://github.com/Attica-org/athens-backend'">
+                    <div class="project-icon">
+                        <img src="assets/athens.png" alt="Athens Icon">
+                    </div>
                     <div class="project-meta">
                         <div class="project-number">01</div>
                         <div class="project-period">Mar.2024 - Jan.2025</div>
@@ -1255,10 +1322,10 @@
                         <ul class="project-highlights">
                             <li>WebSocket(STOMP) 기반 실시간 채팅 서버 구축 및 Pub/Sub 구조로 다중 채팅방 관리</li>
                             <li>OAuth2, JWT 토큰 기반 인증/인가 시스템 설계</li>
-                            <li>JWT 토큰 검증 시 매번 DB 조회로 인한 응답지연, Redis 기반 블랙리스트 및 캐싱 시스템 구축으로 <span class="highlight">토큰 검증 시간 약 98% 개선 ( 50ms → 1ms )</span>
+                            <li>JWT 토큰 검증 시 매번 DB 조회로 인한 응답지연, Redis 기반 블랙리스트 및 캐싱 시스템 구축으로 <span class="highlight">토큰 검증 시간 약 98% 개선 (50ms → 1ms)</span>
                             </li>
                             <li>채팅 메시지 내 비속어를 배열 순회로 검사하여 처리 시간 지연, Aho-Corasick Trie 알고리즘 적용을 통해 <span
-                                    class="highlight">비속어 필터링 과정 약 73% 단축 ( 300ms → 80ms )</span>
+                                    class="highlight">비속어 필터링 과정 약 73% 단축 (300ms → 80ms)</span>
                             </li>
                             <li>WebSocket 세션 만료 검사 시 전체 순회로 O(n) 시간복잡도 부하, <span class="highlight">`TreeMap` 시간순 정렬로 만료 세션만 O(1)</span>
                                 처리
@@ -1269,8 +1336,16 @@
                             <span class="tech-badge">WebSocket</span>
                             <span class="tech-badge">Redis</span>
                             <span class="tech-badge">JWT</span>
-                            <span class="tech-badge">OAuth2</span>
+                            <span class="tech-badge">Trie</span>
                         </div>
+<!--                        <div class="project-buttons">-->
+<!--                            <a href="project-yumcup.html" class="project-btn project-btn-primary">-->
+<!--                                📋 프로젝트 소개 및 트러블슈팅-->
+<!--                            </a>-->
+<!--                            <a href="https://github.com/yourusername/yumcup" target="_blank" class="project-btn project-btn-secondary">-->
+<!--                                🔗 GitHub-->
+<!--                            </a>-->
+<!--                        </div>-->
                     </div>
                     <div class="project-visual" onclick="event.stopPropagation()">
                         <div class="achievement-card" onclick="location.href='achievement-jwt.html'">
@@ -1303,7 +1378,10 @@
                     </div>
                 </div>
 
-                <div class="project-item" onclick="location.href='project-yumcup.html'">
+                <div class="project-item" onclick="location.href='https://github.com/yybmion/yumcup'">
+                    <div class="project-icon">
+                        <img src="assets/yumcup.png" alt="Yumcup Icon">
+                    </div>
                     <div class="project-meta">
                         <div class="project-number">02</div>
                         <div class="project-period">Nov.2024 - Feb.2025</div>
@@ -1312,10 +1390,15 @@
                             위치 기반 음식점 추천 게임 서비스
                         </p>
                         <ul class="project-highlights">
-                            <li>Kakao Map, Google Place API 연동 위치 기반 데이터 수집</li>
-                            <li>API 비동기 병렬 처리로 응답 시간 78% 단축 (9초 → 2초)</li>
-                            <li>Redis + Geohash 기반 중복 검사로 P95 응답 시간 97% 개선 (2000ms → 50ms)</li>
-                            <li>메모리 최적화 및 GC 튜닝으로 힙 사용량 1GB 절감</li>
+                            <li>Kakao Map, Google Place API 연동한 현재 위치 기반 음식점 데이터 수집 시스템 구축</li>
+                            <li>게임 시작 지연으로 인한 유저 이탈 최소화를 위해 식당 조회 API를 <span class="highlight">동기 → 비동기 병렬 처리로 전환(66% 개선)</span> 후 병렬 페이징 및 API 응답 필드 최적화로 P99 응답시간 총 <span class="highlight">78% 단축 (9초 → 2초)</span>
+                            </li>
+                            <li>식당 중복 호출 여부 확인을 위한 DB 조회로 응답 속도 저하 발생, Redis + Geohash 기반 위치 캐싱 시스템 구현으로 P95 기준 <span class="highlight">응답 시간 97% 개선 (2000ms → 50ms)</span>
+                            </li>
+                            <li>제한된 리소스 환경(1GB)에서의 효율적인 운용을 위해, 병렬 처리 시 발생하는 <span class="highlight">중간 컬렉션을 배열로 전환</span> 하고 스트림 내 <span class="highlight">임시 객체 생성을 최소화</span> 하여 <span class="highlight">메모리 및 GC 부하 최적화</span>
+                            </li>
+                            <li>기획-설계-개발-배포-운영 전 과정 단독 수행으로 <span class="highlight">풀사이클 개발 경험</span>
+                            </li>
                         </ul>
                         <div class="project-tech">
                             <span class="tech-badge">Spring Boot</span>
@@ -1386,7 +1469,8 @@
                         <div class="opensource-name">Hibernate ORM</div>
                         <div class="opensource-pr">[HHH-18040]</div>
                         <div class="opensource-desc">
-                            MySQL/MariaDB <span class="highlight">UPDATE/DELETE 서브쿼리의 자기 참조 제한 문제</span>를 분석하고, SQL AST 기반 <span class="highlight">이중 중첩(double nesting)</span> 쿼리
+                            MySQL/MariaDB <span class="highlight">UPDATE/DELETE 서브쿼리의 자기 참조 제한 문제</span>를 분석하고, SQL AST
+                            기반 <span class="highlight">이중 중첩(double nesting)</span> 쿼리
                             재작성으로 해결
                         </div>
                         <div class="opensource-tech">
@@ -1402,7 +1486,8 @@
                         <div class="opensource-name">Spring Integration</div>
                         <div class="opensource-pr">[GH-10508]</div>
                         <div class="opensource-desc">
-                            JdbcChannelMessageStore의 Java 직렬화 대신 <span class="highlight">Jackson JSON 직렬화/역직렬화 지원</span> 추가
+                            JdbcChannelMessageStore의 Java 직렬화 대신 <span class="highlight">Jackson JSON 직렬화/역직렬화 지원</span>
+                            추가
                             (PostgreSQL/MySQL/H2)
                         </div>
                         <div class="opensource-tech">
@@ -1429,7 +1514,8 @@
                         <div class="opensource-name">Logging-log4j2</div>
                         <div class="opensource-pr">[GH-3921]</div>
                         <div class="opensource-desc">
-                            Spring Boot의 다중 설정 파일 로드를 위한 <span class="highlight">CompositeConfiguration 기반 병합 API 구현</span>
+                            Spring Boot의 다중 설정 파일 로드를 위한 <span
+                                class="highlight">CompositeConfiguration 기반 병합 API 구현</span>
                         </div>
                         <div class="opensource-tech">
                             <span class="tech-badge">Log4j2</span>
@@ -1442,7 +1528,8 @@
                         <div class="opensource-name">Java Design Patterns</div>
                         <div class="opensource-pr">[GH-3226]</div>
                         <div class="opensource-desc">
-                            <span class="highlight">Thread-Pool Executor 패턴 예제 구현</span> 및 호텔 체크인 예제 기반 Runnable/Callable 활용 문서화
+                            <span class="highlight">Thread-Pool Executor 패턴 예제 구현</span> 및 호텔 체크인 예제 기반
+                            Runnable/Callable 활용 문서화
                         </div>
                         <div class="opensource-tech">
                             <span class="tech-badge">Java</span>
@@ -1455,7 +1542,8 @@
                         <div class="opensource-name">Public-APIs-4kr (메인테이너)</div>
                         <div class="opensource-pr">2.2k+ Stars</div>
                         <div class="opensource-desc">
-                            한국 개발자를 위한 <span class="highlight">공개 API 오픈소스</span>(2.2k+ STAR)에서 카테고리별 API 문서화와 <span class="highlight">자동화된 링크 상태 검사 시스템</span>을
+                            한국 개발자를 위한 <span class="highlight">공개 API 오픈소스</span>(2.2k+ STAR)에서 카테고리별 API 문서화와 <span
+                                class="highlight">자동화된 링크 상태 검사 시스템</span>을
                             구현하여 문서 신뢰성과 유지보수성을 향상
                         </div>
                         <div class="opensource-tech">
